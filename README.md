@@ -43,7 +43,7 @@ cd quicksync_calc
 ./video-download.sh
 
 # run the benchmark
-./quicksync-benchmark.sh
+./nvenc-benchmark.sh
 
 # copy your results into the following github gist as a comment
 https://gist.github.com/ironicbadger/5da9b321acbe6b6b53070437023b844d
@@ -70,4 +70,14 @@ i5-8500T  h264_1080p      ribblehead_1080p_h264       18952 kb/s  18.928s   182.
 i5-8500T  h264_4k         ribblehead_4k_h264          46881 kb/s  69.238s   49.52    1.75x      9.04
 i5-8500T  hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  45.061s   76.42    2.67x      11.93
 i5-8500T  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  185.816s  18.85    .65x       13.13
+```
+
+```bash
+
+GPU                            TEST            FILE                        BITRATE     TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
+NVIDIA GeForce GTX 1650 SUPER  h264_1080p_cpu  ribblehead_1080p_h264       18952 kb/s  172.875s  20.16    .75x       N/A
+NVIDIA GeForce GTX 1650 SUPER  h264_1080p      ribblehead_1080p_h264       18952 kb/s  18.956s   177.18   6.35x      
+NVIDIA GeForce GTX 1650 SUPER  h264_4k         ribblehead_4k_h264          46881 kb/s  75.394s   44.40    1.65x      
+NVIDIA GeForce GTX 1650 SUPER  hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  27.484s   125.09   4.44x      
+NVIDIA GeForce GTX 1650 SUPER  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  103.416s  32.80    1.18x      
 ```

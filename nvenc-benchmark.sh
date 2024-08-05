@@ -7,20 +7,32 @@ start(){
 }
 
 dep_check(){
-  if ! which jq >/dev/null; then
+  if ! command -v jq >/dev/null; then
     echo "jq missing. Please install jq"
     exit 127
   fi
-  if ! which nvidia-smi >/dev/null; then
+  if ! command -v nvidia-smi >/dev/null; then
     echo "nvidia-smi missing. Please install NVIDIA drivers"
     exit 127
   fi
-  if ! which printf >/dev/null; then
+  if ! command -v printf >/dev/null; then
     echo "printf missing. Please install printf"
     exit 127
   fi
-  if ! which docker >/dev/null; then
+  if ! command -v docker >/dev/null; then
     echo "Docker missing. Please install Docker"
+    exit 127
+  fi
+  if ! command -v nvidia-container-runtime >/dev/null; then
+    echo "nvidia-container-runtime missing. Please install nvidia-docker"
+    exit 127
+  fi
+  if ! command -v nvidia-docker >/dev/null; then
+    echo "Docker is not configured with nvidia runtime. Please configure nvidia-docker"
+    exit 127
+  fi
+  if ! command -v docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi >/dev/null 2>&1; then
+    echo "nvidia-docker is not functioning correctly. Please check the setup"
     exit 127
   fi
 }
@@ -58,7 +70,7 @@ stop_container(){
 benchmarks(){
   nvidia-smi --query-gpu=timestamp,power.draw --format=csv,noheader,nounits -l 1 -f $1.output &
   nvsmi_pid=$!
-  docker exec -it jellyfin-nvenctest /config/benchmark.sh $1
+  docker exec -it jellyfin-nvenctest /config/benchmark_nvenc.sh $1
   kill -s SIGINT $nvsmi_pid
   #Calculate average Wattage
   if [ $1 != "h264_1080p_cpu" ]; then

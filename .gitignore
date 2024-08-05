@@ -1,3 +1,5 @@
 venv
 #plot.png
 comments.pkl
+amf-benchmark.sh
+benchmark_amf.sh
