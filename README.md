@@ -1,22 +1,26 @@
 
-Runs an ffmpeg benchmark to get Average Speed, FPS, and Watts
+Runs an ffmpeg benchmark to get Average Speed, FPS, and Watts folked from ironicbadger/quicksync_calc
 ===========================================
 
-The purpose of this script is to benchmark Intel Quick Sync Video performance in integrated iGPUs using a standardised video. More information and rationale is available [at blog.ktz.me](https://blog.ktz.me/i-need-your-help-with-intel-quick-sync-benchmarking/).
+The purpose of this script is to benchmark Nvidia NVENC, Intel Quick Sync Video performance in integrated iGPUs and dGPU using standardised video. More information and rationale is available [at blog.ktz.me](https://blog.ktz.me/i-need-your-help-with-intel-quick-sync-benchmarking/).
 
 Some conclusions and analysis has now been performed (May 2024), you can read about it [https://blog.ktz.me/the-best-media-server-cpu-in-the-world/](https://blog.ktz.me/the-best-media-server-cpu-in-the-world/).
 
 REQUIREMENTS
 ------------
 
+For Intel_qsv:
 Requires Docker, Intel CPU w/ QuickSync, printf, and intel-gpu-tools package. Designed for Linux. Tested on Proxmox 8 and Ubuntu 22.04.
+
+For Nvidia_nvenc
+Requires docker-nvidia, Nvidia GPU with nvenc and nvidia-smi tool for stats. Tested on Ubuntu
 
 This should be run as root with no other applications/containers running that would utilize quicksync. This includes Desktop Environments.
 
 RESULTS PLOT
 ------------
 
-Here's a plot of all results run to date from the results [Gist](https://gist.github.com/ironicbadger/5da9b321acbe6b6b53070437023b844d) - thanks to [u/Alicimo](https://github.com/Alicimo) for this. It's updated weekly via an automated action.
+Here's a plot of all Intel_QSV results run to date from the results [Gist](https://gist.github.com/ironicbadger/5da9b321acbe6b6b53070437023b844d) - thanks to [u/Alicimo](https://github.com/Alicimo) for this. It's updated weekly via an automated action.
 
 ![results](plot.png)
 
