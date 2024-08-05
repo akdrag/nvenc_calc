@@ -1,12 +1,12 @@
 #!/bin/bash
 
-session="qsv-benchmark"
+session="nvenc-benchmark"
 
 tmux new-session -d -s $session
 tmux send-keys 'bash video-download.sh' 'C-m'
-tmux send-keys 'to run the benchmark, execute \"bash quicksync-benchmark.sh\"' 'C-m'
+tmux send-keys 'to run the benchmark, execute \"bash nvenc-benchmark.sh\"' 'C-m'
 tmux split-window -v
-tmux send-keys 'intel_gpu_top' 'C-m'
+tmux send-keys 'watch nvidia-smi' 'C-m'
 tmux split-window -h
 tmux send-keys 'htop' 'C-m'
 tmux select-pane -t 0
