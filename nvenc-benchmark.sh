@@ -75,6 +75,7 @@ benchmarks(){
   #Calculate average Wattage
   if [ $1 != "h264_1080p_cpu" ]; then
     avg_watts=$(nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits)
+    gpu_model=$(grep -m1 'model name' /proc/cpuinfo | cut -d':' -f2)
   else
     total_watts=$(awk -F, '{print $2}' $1.output | paste -s -d + - | bc)
     total_count=$(wc -l < $1.output)
@@ -85,7 +86,8 @@ benchmarks(){
     total_fps=$(grep -Eo 'fps=.[1-9][1-9].' $i | sed -e 's/fps=//' | paste -s -d + - | bc)
     fps_count=$(grep -Eo 'fps=.[1-9][1-9].' $i | wc -l)
     avg_fps=$(echo "scale=2; $total_fps / $fps_count" | bc -l)
-    #Calculate average speed
+    gpu_model=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits) 
+   #Calculate average speed
     total_speed=$(grep -Eo 'speed=[0-9].[0-9].' $i | sed -e 's/speed=//' | paste -s -d + - | bc)
     speed_count=$(grep -Eo 'speed=[0-9].[0-9].' $i | sed -e 's/speed=//' | wc -l)
     avg_speed="$(echo "scale=2; $total_speed / $speed_count" | bc -l)x"
@@ -113,7 +115,7 @@ main(){
   nvencstats_arr=("GPU|TEST|FILE|BITRATE|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
   driver_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
   #Collects GPU Model
-  gpu_model=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)
+#  gpu_model=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)
   benchmarks h264_1080p_cpu ribblehead_1080p_h264
   benchmarks h264_1080p ribblehead_1080p_h264
   benchmarks h264_4k ribblehead_4k_h264
