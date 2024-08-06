@@ -2,7 +2,7 @@
 
 start(){
   cleanup
-#  dep_check
+  dep_check
   start_container
 }
 
@@ -27,10 +27,10 @@ dep_check(){
     echo "nvidia-container-runtime missing. Please install nvidia-docker"
     exit 127
   fi
-  if ! command -v nvidia-docker >/dev/null; then
-    echo "Docker is not configured with nvidia runtime. Please configure nvidia-docker"
-    exit 127
-  fi
+#  if ! command -v nvidia-docker >/dev/null; then
+#    echo "Docker is not configured with nvidia runtime. Please configure nvidia-docker"
+#    exit 127
+#  fi
   if ! command -v docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi >/dev/null 2>&1; then
     echo "nvidia-docker is not functioning correctly. Please check the setup"
     exit 127
