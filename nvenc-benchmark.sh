@@ -111,6 +111,7 @@ clear_vars(){
 main(){
   #Sets Array
   nvencstats_arr=("GPU|TEST|FILE|BITRATE|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
+  driver_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
   #Collects GPU Model
   gpu_model=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)
   benchmarks h264_1080p_cpu ribblehead_1080p_h264
@@ -119,6 +120,8 @@ main(){
   benchmarks hevc_8bit ribblehead_1080p_hevc_8bit
   benchmarks hevc_4k_10bit ribblehead_4k_hevc_10bit
   #Print Results
+  printf "NVIDIA driver version ${driver_version}"
+  printf "\n"
   printf '%s\n' "${nvencstats_arr[@]}" | column -t -s '|'
   printf "\n"
   #Unset Array
