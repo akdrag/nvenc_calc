@@ -95,7 +95,8 @@ benchmarks(){
     speed_count=$(grep -Eo 'speed=[0-9].[0-9].' $i | sed -e 's/speed=//' | wc -l)
     avg_speed="$(echo "scale=2; $total_speed / $speed_count" | bc -l)x"
     #Get Bitrate of file
-    bitrate=$(grep -Eo 'bitrate: [1-9].*' $i | sed -e 's/bitrate: //')
+    bitrate1=$(grep -Eo 'bitrate: [1-9].*' $i | head -n 1 | sed -e 's/bitrate: //')
+    bitrate2=$(grep -Eo 'bitrate: [1-9].*' $i | sed -n '2p' | sed -e 's/bitrate: //')
     #Get time to convert
     total_time=$(grep -Eo 'rtime=[1-9].*s' $i | sed -e 's/rtime=//')
     #delete log file
@@ -103,7 +104,7 @@ benchmarks(){
     rm -rf $1.output
   done
   #Add data to array
-  nvencstats_arr+=("$gpu_model|$1|$2|$bitrate|$total_time|$avg_fps|$avg_speed|$avg_watts")
+  nvencstats_arr+=("$gpu_model|$1|$2|$bitrate1|$bitrate2|$total_time|$avg_fps|$avg_speed|$avg_watts")
   clear_vars
 }
 
@@ -115,7 +116,7 @@ clear_vars(){
 
 main(){
   #Sets Array
-  nvencstats_arr=("GPU|TEST|FILE|BITRATE|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
+  nvencstats_arr=("GPU|TEST|FILE|BITRATE1|BITRATE1|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
   driver_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
   #Collects GPU Model
   benchmarks h264_1080p_cpu ribblehead_1080p_h264
@@ -123,6 +124,9 @@ main(){
   benchmarks h264_4k ribblehead_4k_h264
   benchmarks hevc_8bit ribblehead_1080p_hevc_8bit
   benchmarks hevc_4k_10bit ribblehead_4k_hevc_10bit
+  benchmarks multistream_encoding_h264 multistream_x4_h264
+  benchmarks multistream_encoding_hevc multistream_x4_hevc
+
   #Print Results
   printf "NVIDIA driver version ${driver_version}"
   printf "\n"
