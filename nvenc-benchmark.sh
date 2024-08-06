@@ -2,7 +2,7 @@
 
 start(){
   cleanup
-  dep_check
+#  dep_check
   start_container
 }
 
@@ -47,7 +47,7 @@ cleanup(){
   docker rm jellyfin-nvenctest >/dev/null 2>&1
   
   # Remove jellyfin image if it exists
-  docker rmi jellyfin/jellyfin >/dev/null 2>&1
+#  docker rmi jellyfin/jellyfin >/dev/null 2>&1
 }
 
 start_container(){
@@ -74,11 +74,11 @@ benchmarks(){
   kill -s SIGINT $nvsmi_pid
   #Calculate average Wattage
   if [ $1 != "h264_1080p_cpu" ]; then
+    avg_watts=$(nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits)
+  else
     total_watts=$(awk -F, '{print $2}' $1.output | paste -s -d + - | bc)
     total_count=$(wc -l < $1.output)
     avg_watts=$(echo "scale=2; $total_watts / $total_count" | bc -l)
-  else
-    avg_watts="N/A"
   fi
   for i in $(ls ffmpeg-*.log); do
     #Calculate average FPS
