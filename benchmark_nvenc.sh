@@ -28,7 +28,7 @@ case "$1" in
 h264_1080p_cpu(){
   echo "=== CPU only test"
   echo "h264_1080p_cpu - h264 to h264 cpu starting."
-  /usr/lib/jellyfin-ffmpeg/ffmpeg -y -hide_banner -benchmark -report -i /config/ribblehead_1080p_h264.mp4 -c:a copy -c:v h264 -preset fast -look_ahead 1 -f null - 2>/dev/null
+  /usr/lib/jellyfin-ffmpeg/ffmpeg -y -hide_banner -benchmark -report -i /config/ribblehead_1080p_h264.mp4 -c:a copy -c:v libx264 -preset fast -look_ahead 1 -f null - 2>/dev/null
 }
 
 h264_1080p(){
