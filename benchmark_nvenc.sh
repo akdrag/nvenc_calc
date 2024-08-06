@@ -39,7 +39,7 @@ h264_1080p(){
 
 h264_4k(){
   echo "=== NVENC test"
-  echo "h264_4k - h264 to h264_qsv starting."
+  echo "h264_4k - h264 to h264_nvenc starting."
   /usr/lib/jellyfin-ffmpeg/ffmpeg -y -hide_banner -benchmark -report -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_4k_h264.mp4 -c:a copy -c:v h264_nvenc -preset slow -cq 18 -look_ahead 1 -f null - 2>/dev/null
 }
 

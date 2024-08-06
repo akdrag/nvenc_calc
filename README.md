@@ -80,8 +80,20 @@ i5-8500T  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  185.816s  18.8
 
 GPU                            TEST            FILE                        BITRATE     TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
 NVIDIA GeForce GTX 1650 SUPER  h264_1080p_cpu  ribblehead_1080p_h264       18952 kb/s  172.875s  20.16    .75x       N/A
-NVIDIA GeForce GTX 1650 SUPER  h264_1080p      ribblehead_1080p_h264       18952 kb/s  18.956s   177.18   6.35x      
-NVIDIA GeForce GTX 1650 SUPER  h264_4k         ribblehead_4k_h264          46881 kb/s  75.394s   44.40    1.65x      
-NVIDIA GeForce GTX 1650 SUPER  hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  27.484s   125.09   4.44x      
-NVIDIA GeForce GTX 1650 SUPER  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  103.416s  32.80    1.18x      
+NVIDIA GeForce GTX 1650 SUPER  h264_1080p      ribblehead_1080p_h264       18952 kb/s  18.956s   177.18   6.35x      39
+NVIDIA GeForce GTX 1650 SUPER  h264_4k         ribblehead_4k_h264          46881 kb/s  75.394s   44.40    1.65x      35
+NVIDIA GeForce GTX 1650 SUPER  hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  27.484s   125.09   4.44x      38
+NVIDIA GeForce GTX 1650 SUPER  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  103.416s  32.80    1.18x      45
+```
+
+```bash
+
+NVIDIA driver version 545.29.06
+GPU                                   TEST            FILE                        BITRATE     TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
+ AMD Ryzen 9 5900X 12-Core Processor  h264_1080p_cpu  ribblehead_1080p_h264       18952 kb/s  19.784s   164.40   6.15x      
+NVIDIA GeForce RTX 3080 Ti            h264_1080p      ribblehead_1080p_h264       18952 kb/s  20.023s   169.48   6.16x      147.91
+NVIDIA GeForce RTX 3080 Ti            h264_4k         ribblehead_4k_h264          46881 kb/s  81.763s   41.31    1.55x      151.15
+NVIDIA GeForce RTX 3080 Ti            hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  28.348s   121.12   4.32x      149.45
+NVIDIA GeForce RTX 3080 Ti            hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  108.178s  31.58    1.16x      149.92
+
 ```
