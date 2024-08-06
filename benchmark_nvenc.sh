@@ -68,9 +68,8 @@ multistream_encoding_h264() {
     echo "Encoding 4 h264 streams simultaneously"
     
     /usr/lib/jellyfin-ffmpeg/ffmpeg -y -hide_banner -benchmark -report \
-    -hwaccel cuda -hwaccel_output_format cuda \
-    -i /config/ribblehead_1080p_h264.mp4 \
-    -i /config/ribblehead_4k_h264.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_1080p_h264.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_4k_h264.mp4 \
     -filter_complex "[0:v]split=2[out1][out2];[1:v]split=2[out3][out4]" \
     -map "[out1]" -c:v h264_nvenc -preset slow -cq 18 -look_ahead 10 \
     -map "[out2]" -c:v hevc_nvenc -preset slow -cq 18 -look_ahead 10 \
@@ -84,9 +83,8 @@ multistream_encoding_hevc() {
     echo "Encoding 4 hevc streams simultaneously"
     
     /usr/lib/jellyfin-ffmpeg/ffmpeg -y -hide_banner -benchmark -report \
-    -hwaccel cuda -hwaccel_output_format cuda \
-    -i /config/ribblehead_1080p_hevc_8bit.mp4 \
-    -i /config/ribblehead_4k_hevc_10bit.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_1080p_hevc_8bit.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_4k_hevc_10bit.mp4 \
     -filter_complex "[0:v]split=2[out1][out2];[1:v]split=2[out3][out4]" \
     -map "[out1]" -c:v h264_nvenc -preset slow -cq 18 -look_ahead 10 \
     -map "[out2]" -c:v hevc_nvenc -preset slow -cq 18 -look_ahead 10 \
