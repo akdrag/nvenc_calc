@@ -84,12 +84,13 @@ NVIDIA GeForce GTX 1650 SUPER                     hevc_4k_10bit   ribblehead_4k_
 
 ```bash
 NVIDIA driver version 545.29.06
-GPU                                   TEST                       FILE                        BITRATE1    BITRATE1    TIME     AVG_FPS  AVG_SPEED  AVG_WATTS
-AMD Ryzen 9 5900X 12-Core Processor  h264_1080p_cpu             ribblehead_1080p_h264       18952 kb/s              23.345s  139.00   5.30x      
-NVIDIA GeForce RTX 3080 Ti            h264_1080p                 ribblehead_1080p_h264       18952 kb/s              5.266s   650.50   x          142.70
-NVIDIA GeForce RTX 3080 Ti            h264_4k                    ribblehead_4k_h264          46881 kb/s              20.151s  169.97   5.94x      146.56
-NVIDIA GeForce RTX 3080 Ti            hevc_8bit                  ribblehead_1080p_hevc_8bit  14947 kb/s              4.757s   729.85   x          145.58
-NVIDIA GeForce RTX 3080 Ti            hevc_4k_10bit              ribblehead_4k_hevc_10bit    44617 kb/s              17.379s  195.13   6.77x      157.75
-NVIDIA GeForce RTX 3080 Ti            multistream_encoding_h264  multistream_x4_h264         18952 kb/s  46881 kb/s  44.141s  76.74    2.54x      146.36
-NVIDIA GeForce RTX 3080 Ti            multistream_encoding_hevc  multistream_x4_hevc         14947 kb/s  44617 kb/s  44.086s  75.97    2.51x      148.83
+GPU                                   TEST                       FILE                        INP_BITRATE1  INP_BITRATE2    TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
+ AMD Ryzen 9 5900X 12-Core Processor  h264_1080p_cpu             ribblehead_1080p_h264       18952 kb/s                    23.235s   139.27   5.30x      
+NVIDIA GeForce RTX 3080 Ti            h264_1080p                 ribblehead_1080p_h264       18952 kb/s                    20.071s   169.27   6.17x      135.62
+NVIDIA GeForce RTX 3080 Ti            h264_4k                    ribblehead_4k_h264          46881 kb/s                    81.326s   41.23    1.54x      144.96
+NVIDIA GeForce RTX 3080 Ti            hevc_8bit                  ribblehead_1080p_hevc_8bit  14947 kb/s                    28.112s   122.00   4.35x      145.72
+NVIDIA GeForce RTX 3080 Ti            hevc_4k_10bit              ribblehead_4k_hevc_10bit    44617 kb/s                    107.733s  31.69    1.15x      147.97
+NVIDIA GeForce RTX 3080 Ti            multistream_encoding_h264  multistream_x4_h264         18952 kb/s    46881 kb/s      286.420s  11.92    .38x       146.48
+NVIDIA GeForce RTX 3080 Ti            multistream_encoding_hevc  multistream_x4_hevc         14947 kb/s    44617 kb/s      273.322s  12.69    .40x       146.45
+
 ```

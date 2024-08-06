@@ -97,6 +97,8 @@ benchmarks(){
     #Get Bitrate of file
     bitrate1=$(grep -Eo 'bitrate: [1-9].*' $i | head -n 1 | sed -e 's/bitrate: //')
     bitrate2=$(grep -Eo 'bitrate: [1-9].*' $i | sed -n '2p' | sed -e 's/bitrate: //')
+  #  out_bitrate=$(grep -Eo 'bitrate=[1-9][0-9]*' "$i" | tail -n 1 | sed -e 's/bitrate: //')
+  #  out_bitrate2=$(grep -Eo 'bitrate=[1-9][0-9]*' "$i" | tail -n 1 | sed -e 's/bitrate: //')
     #Get time to convert
     total_time=$(grep -Eo 'rtime=[1-9].*s' $i | sed -e 's/rtime=//')
     #delete log file
@@ -116,7 +118,7 @@ clear_vars(){
 
 main(){
   #Sets Array
-  nvencstats_arr=("GPU|TEST|FILE|BITRATE1|BITRATE1|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
+  nvencstats_arr=("GPU|TEST|FILE|INP_BITRATE1|INP_BITRATE2|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
   driver_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
   #Collects GPU Model
   benchmarks h264_1080p_cpu ribblehead_1080p_h264
