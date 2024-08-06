@@ -13,17 +13,11 @@ For Intel_qsv:
 Requires Docker, Intel CPU w/ QuickSync, printf, and intel-gpu-tools package. Designed for Linux. Tested on Proxmox 8 and Ubuntu 22.04.
 
 For Nvidia_nvenc
-Requires docker-nvidia, Nvidia GPU with nvenc and nvidia-smi tool for stats. Tested on Ubuntu
+Requires docker-nvidia, Nvidia GPU with nvenc and nvidia-smi tool for stats. Tested on Ubuntu 
+
+Install [Nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
 This should be run as root with no other applications/containers running that would utilize quicksync. This includes Desktop Environments.
-
-RESULTS PLOT
-------------
-
-Here's a plot of all Intel_QSV results run to date from the results [Gist](https://gist.github.com/ironicbadger/5da9b321acbe6b6b53070437023b844d) - thanks to [u/Alicimo](https://github.com/Alicimo) for this. It's updated weekly via an automated action.
-
-![results](plot.png)
-
 
 HOW TO USE
 ------------
@@ -35,22 +29,24 @@ Full instructions available at [blog.ktz.me](https://blog.ktz.me/i-need-your-hel
 ssh user@hostname
 
 # install a couple of dependencies (script tested on proxmox 8 + ubuntu 22.04)
+For Intel
 apt install docker.io jq bc intel-gpu-tools git
 
+
+For NVIDIA
+For Nvidia-container-toolkit refer => https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html 
+apt install docker.io jq bc git nvidia-container-toolkit
+
+
 # clone the git repo with the script
-git clone https://github.com/ironicbadger/quicksync_calc.git
+git clone https://github.com/akdrag/nvenc_calc.git
 
 # change directory into the cloned repo
-cd quicksync_calc
+cd nvenc_calc
 
-# download the test videos
-./video-download.sh
+# download the test videos and run the benchmark
+./enter-benchmark.sh
 
-# run the benchmark
-./nvenc-benchmark.sh
-
-# copy your results into the following github gist as a comment
-https://gist.github.com/ironicbadger/5da9b321acbe6b6b53070437023b844d
 ```
 
 
@@ -78,12 +74,14 @@ i5-8500T  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  185.816s  18.8
 
 ```bash
 
-GPU                            TEST            FILE                        BITRATE     TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
-NVIDIA GeForce GTX 1650 SUPER  h264_1080p_cpu  ribblehead_1080p_h264       18952 kb/s  172.875s  20.16    .75x       N/A
-NVIDIA GeForce GTX 1650 SUPER  h264_1080p      ribblehead_1080p_h264       18952 kb/s  18.956s   177.18   6.35x      39
-NVIDIA GeForce GTX 1650 SUPER  h264_4k         ribblehead_4k_h264          46881 kb/s  75.394s   44.40    1.65x      35
-NVIDIA GeForce GTX 1650 SUPER  hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  27.484s   125.09   4.44x      38
-NVIDIA GeForce GTX 1650 SUPER  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  103.416s  32.80    1.18x      45
+NVIDIA driver version 545.29.02
+GPU                                               TEST            FILE                        BITRATE     TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
+ Intel(R) Core(TM) i7 CPU         870  @ 2.93GHz  h264_1080p_cpu  ribblehead_1080p_h264       18952 kb/s  171.607s  20.33    .76x       
+NVIDIA GeForce GTX 1650 SUPER                     h264_1080p      ribblehead_1080p_h264       18952 kb/s  19.813s   169.40   6.13x      32.41
+NVIDIA GeForce GTX 1650 SUPER                     h264_4k         ribblehead_4k_h264          46881 kb/s  79.479s   42.30    1.57x      30.54
+NVIDIA GeForce GTX 1650 SUPER                     hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  27.561s   124.62   4.40x      31.70
+NVIDIA GeForce GTX 1650 SUPER                     hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  104.627s  32.70    1.17x      32.60
+
 ```
 
 ```bash
