@@ -74,12 +74,15 @@ i5-8500T  hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  185.816s  18.8
 
 ```bash
 NVIDIA driver version 545.29.02
-GPU                                               TEST            FILE                        BITRATE     TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
-Intel(R) Core(TM) i7 CPU         870  @ 2.93GHz  h264_1080p_cpu  ribblehead_1080p_h264       18952 kb/s  171.607s  20.33    .76x       
-NVIDIA GeForce GTX 1650 SUPER                     h264_1080p      ribblehead_1080p_h264       18952 kb/s  19.813s   169.40   6.13x      32.41
-NVIDIA GeForce GTX 1650 SUPER                     h264_4k         ribblehead_4k_h264          46881 kb/s  79.479s   42.30    1.57x      30.54
-NVIDIA GeForce GTX 1650 SUPER                     hevc_8bit       ribblehead_1080p_hevc_8bit  14947 kb/s  27.561s   124.62   4.40x      31.70
-NVIDIA GeForce GTX 1650 SUPER                     hevc_4k_10bit   ribblehead_4k_hevc_10bit    44617 kb/s  104.627s  32.70    1.17x      32.60
+DEVICE                                            TEST                       FILE                        INP_BITRATE1  INP_BITRATE2  TIME      AVG_FPS  AVG_SPEED  AVG_WATTS
+ Intel(R) Core(TM) i7 CPU         870  @ 2.93GHz  h264_1080p_cpu             ribblehead_1080p_h264       18952 kb/s                  209.568s  16.27    .62x       
+NVIDIA GeForce GTX 1650 SUPER                     h264_1080p                 ribblehead_1080p_h264       18952 kb/s                  19.848s   168.10   6.07x      28.64sss
+NVIDIA GeForce GTX 1650 SUPER                     h264_4k                    ribblehead_4k_h264          46881 kb/s                  79.457s   42.29    1.56x      29.71sss
+NVIDIA GeForce GTX 1650 SUPER                     hevc_8bit                  ribblehead_1080p_hevc_8bit  14947 kb/s                  27.558s   124.66   4.40x      31.53sss
+NVIDIA GeForce GTX 1650 SUPER                     hevc_4k_10bit              ribblehead_4k_hevc_10bit    44617 kb/s                  104.621s  32.68    1.17x      32.59sss
+NVIDIA GeForce GTX 1650 SUPER                     multistream_encoding_h264  multistream_x4_h264         18952 kb/s    46881 kb/s    267.221s  12.93    .42x       31.28sss
+NVIDIA GeForce GTX 1650 SUPER                     multistream_encoding_hevc  multistream_x4_hevc         14947 kb/s    44617 kb/s    263.734s  12.94    .42x       32.32sss
+
 ```
 
 ```bash
