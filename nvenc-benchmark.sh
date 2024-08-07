@@ -74,7 +74,7 @@ benchmarks(){
   kill -s SIGINT $nvsmi_pid
   #Calculate average Wattage
   if [ $1 != "h264_1080p_cpu" ]; then
-    avg_watts=$(nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits)
+    avg_watts=$(nvidia-smi --query-gpu=power.draw --format=csv,noheader,nounits)sss
     gpu_model=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits) 
 
   else
@@ -118,7 +118,7 @@ clear_vars(){
 
 main(){
   #Sets Array
-  nvencstats_arr=("GPU|TEST|FILE|INP_BITRATE1|INP_BITRATE2|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
+  nvencstats_arr=("DEVICE|TEST|FILE|INP_BITRATE1|INP_BITRATE2|TIME|AVG_FPS|AVG_SPEED|AVG_WATTS")
   driver_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
   #Collects GPU Model
   benchmarks h264_1080p_cpu ribblehead_1080p_h264
@@ -128,7 +128,13 @@ main(){
   benchmarks hevc_4k_10bit ribblehead_4k_hevc_10bit
   benchmarks multistream_encoding_h264 multistream_x4_h264
   benchmarks multistream_encoding_hevc multistream_x4_hevc
+  printf "\n"
 
+  read -p "press 1 for 8x stream encode test: " user
+  if [ "$user" = "1" ]; then
+    benchmark multistream_x8_encoding_h264+hevc multistream_x8_h264+hevc
+  fi
+  printf "\n"
   #Print Results
   printf "NVIDIA driver version ${driver_version}"
   printf "\n"

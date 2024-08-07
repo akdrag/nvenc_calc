@@ -93,6 +93,27 @@ multistream_encoding_hevc() {
     -f null - 2>/dev/null
 }
 
+multistream_x8_encoding_h264+hevc() {
+    echo "=== Multistream h264+hevc NVENC test"
+    echo "Encoding 8 h264+hevc streams simultaneously"
+    
+    /usr/lib/jellyfin-ffmpeg/ffmpeg -y -hide_banner -benchmark -report \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_1080p_h264.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_4k_h264.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_1080p_hevc_8bit.mp4 \
+    -hwaccel cuda -hwaccel_output_format cuda -i /config/ribblehead_4k_hevc_10bit.mp4 \
+    -filter_complex "[0:v]split=2[out1][out2];[1:v]split=2[out3][out4];[2:v]split=2[out5][out6];[3:v]split=2[out7][out8]" \
+    -map "[out1]" -c:v h264_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out2]" -c:v hevc_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out3]" -c:v h264_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out4]" -c:v hevc_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out5]" -c:v h264_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out6]" -c:v hevc_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out7]" -c:v h264_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -map "[out8]" -c:v hevc_nvenc -preset slow -cq 18 -look_ahead 10 \
+    -f null - 2>/dev/null
+}
+
 cd /config
 
 benchmark $1
