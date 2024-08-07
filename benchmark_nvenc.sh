@@ -30,6 +30,11 @@ case "$1" in
     multistream_encoding_hevc)
       multistream_encoding_hevc
       ;;
+    
+    multistream_x8_encoding_h264+hevc)
+      multistream_x8_encoding_h264+hevc
+      ;;
+
   esac
 }
 
